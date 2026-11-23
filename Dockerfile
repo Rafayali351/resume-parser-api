@@ -28,8 +28,4 @@ COPY --from=build /app/target/resume-parser-api-0.0.1-SNAPSHOT.jar app.jar
 # Expose standard port 8080
 EXPOSE 8080
 
-# Environment variables with defaults
-ENV SERVER_PORT=8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
+ENTRYPOINT ["sh", "-c", "exec java -Dserver.port=${PORT:-8080} -jar app.jar"]
